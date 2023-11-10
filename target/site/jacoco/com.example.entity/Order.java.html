@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Order.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OrderService</a> &gt; <a href="index.source.html" class="el_package">com.example.entity</a> &gt; <span class="el_source">Order.java</span></div><h1>Order.java</h1><pre class="source lang-java linenums">package com.example.entity;
+
+import java.time.Instant;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+<span class="nc bnc" id="L18" title="All 54 branches missed.">@Data</span>
+<span class="nc" id="L19">@AllArgsConstructor</span>
+<span class="fc" id="L20">@NoArgsConstructor</span>
+<span class="nc" id="L21">@Builder</span>
+@Entity
+@Table(name = &quot;order_details&quot;)
+public class Order {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = &quot;ORDER_ID&quot;)
+<span class="nc" id="L29">	private Long orderId;</span>
+	
+	@Column(name = &quot;PRODUCT_ID&quot;)
+<span class="nc" id="L32">	private Long productId;</span>
+	
+	@Column(name = &quot;QUANTITY&quot;)
+<span class="nc" id="L35">	private Long quantity;</span>
+	
+	@Column(name = &quot;ORDER_DATE&quot;)
+<span class="nc" id="L38">	private Instant orderDate;</span>
+	
+	@Column(name = &quot;STATUS&quot;)
+<span class="nc" id="L41">	private String status;</span>
+	
+	@Column(name = &quot;TOTAL_AMOUNT&quot;)
+<span class="nc" id="L44">	private Long totalAmount;</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

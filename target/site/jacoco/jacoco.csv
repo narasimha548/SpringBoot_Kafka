@@ -1,0 +1,16 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+OrderService,com.example.dto,PaymentMode,64,0,0,0,7,0,1,0,1,0
+OrderService,com.example.dto,PaymentRequest,214,0,38,0,8,0,34,0,15,0
+OrderService,com.example.dto,ProductResponse.ProductResponseBuilder,45,0,0,0,1,0,7,0,7,0
+OrderService,com.example.dto,ProductResponse,188,0,20,0,8,0,25,0,15,0
+OrderService,com.example.dto,OrderEvent,3,0,0,0,1,0,1,0,1,0
+OrderService,com.example.dto,PaymentRequest.PaymentRequestBuilder,45,0,0,0,1,0,7,0,7,0
+OrderService,com.example.dto,OrderRequest.OrderRequestBuilder,45,0,0,0,1,0,7,0,7,0
+OrderService,com.example.dto,OrderRequest,214,0,38,0,8,0,34,0,15,0
+OrderService,com.example.kafka,KafkaProducer,19,13,0,0,5,5,1,2,1,2
+OrderService,com.example,OrderServiceApplication,5,3,0,0,2,1,1,1,1,1
+OrderService,com.example.controller,OrderController,14,10,0,0,3,4,1,2,1,2
+OrderService,com.example.service,OrderServiceImpl,56,16,2,0,10,6,2,2,1,2
+OrderService,com.example.config,KafkaTopicConfig,0,8,0,0,0,2,0,2,0,2
+OrderService,com.example.entity,Order,297,3,54,0,9,1,45,1,18,1
+OrderService,com.example.entity,Order.OrderBuilder,63,0,0,0,1,0,9,0,9,0

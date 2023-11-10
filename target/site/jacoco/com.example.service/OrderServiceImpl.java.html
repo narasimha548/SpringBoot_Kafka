@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OrderService</a> &gt; <a href="index.source.html" class="el_package">com.example.service</a> &gt; <span class="el_source">OrderServiceImpl.java</span></div><h1>OrderServiceImpl.java</h1><pre class="source lang-java linenums">package com.example.service;
+
+import java.time.Instant;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.example.dto.OrderRequest;
+import com.example.dto.ProductResponse;
+import com.example.entity.Order;
+import com.example.repository.OrderRepository;
+
+import lombok.extern.log4j.Log4j2;
+
+@Service
+<span class="fc" id="L16">@Log4j2</span>
+public class OrderServiceImpl implements OrderService {
+
+	private OrderRepository orderRepository;
+	private ProductService productService;
+	private PaymentService paymentService;
+
+	public OrderServiceImpl(OrderRepository orderRepository, ProductService productService,
+<span class="fc" id="L24">			PaymentService paymentService) {</span>
+<span class="fc" id="L25">		this.orderRepository = orderRepository;</span>
+<span class="fc" id="L26">		this.productService = productService;</span>
+<span class="fc" id="L27">		this.paymentService = paymentService;</span>
+<span class="fc" id="L28">	}</span>
+
+	@Override
+	public Long placeOrder(OrderRequest orderReq) {
+<span class="nc" id="L32">		log.info(&quot;place order with order request :: &quot; + orderReq);</span>
+		// Order Entity -&gt; save the data with status order created
+		// call product service -&gt; to block the products
+
+<span class="nc" id="L36">		Order order = Order.builder().productId(orderReq.getProductId()).quantity(orderReq.getQuantity())</span>
+<span class="nc" id="L37">				.orderDate(Instant.now()).totalAmount(orderReq.getTotalAmount()).status(&quot;CREATED&quot;).build();</span>
+
+<span class="nc" id="L39">		ResponseEntity&lt;ProductResponse&gt; productInfo = productService.getProductInfo(orderReq.getProductId());</span>
+
+<span class="nc bnc" id="L41" title="All 2 branches missed.">		if (productInfo.getStatusCodeValue() == 200) {</span>
+<span class="nc" id="L42">			order = orderRepository.save(order);</span>
+
+<span class="nc" id="L44">			paymentService.doPayment(null);</span>
+
+<span class="nc" id="L46">			log.info(&quot;Order placed successfully with order id :&quot; + order.getOrderId());</span>
+		} else {
+<span class="nc" id="L48">			log.error(&quot;unable to fetch product details &quot;, productInfo.getBody());</span>
+		}
+
+		// Payment service -&gt; to complete the payment as well, if payment is successful
+		// then mark as COMPLETED else CANCELED.
+
+<span class="nc" id="L54">		return order.getOrderId();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>KafkaProducer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">OrderService</a> &gt; <a href="index.source.html" class="el_package">com.example.kafka</a> &gt; <span class="el_source">KafkaProducer.java</span></div><h1>KafkaProducer.java</h1><pre class="source lang-java linenums">package com.example.kafka;
+
+import org.apache.kafka.clients.admin.NewTopic;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.stereotype.Service;
+
+import com.example.dto.OrderEvent;
+
+import lombok.extern.log4j.Log4j2;
+
+@Service
+<span class="fc" id="L15">@Log4j2</span>
+public class KafkaProducer {
+
+	private NewTopic topic;
+
+	private KafkaTemplate&lt;String, OrderEvent&gt; kafkaTemplate;
+
+<span class="fc" id="L22">	public KafkaProducer(NewTopic topic, KafkaTemplate&lt;String, OrderEvent&gt; kafkaTemplate) {</span>
+<span class="fc" id="L23">		this.topic = topic;</span>
+<span class="fc" id="L24">		this.kafkaTemplate = kafkaTemplate;</span>
+<span class="fc" id="L25">	}</span>
+
+	public void sendEvent(OrderEvent orderEvent) {
+<span class="nc" id="L28">		log.info(&quot;event is created for order event ::::: &quot; + orderEvent);</span>
+
+		// create message
+
+<span class="nc" id="L32">		Message&lt;OrderEvent&gt; message = MessageBuilder.withPayload(orderEvent).setHeader(KafkaHeaders.TOPIC, topic.name())</span>
+<span class="nc" id="L33">				.build();</span>
+
+<span class="nc" id="L35">		kafkaTemplate.send(message);</span>
+
+<span class="nc" id="L37">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
